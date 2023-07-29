@@ -3,13 +3,14 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import SignUpForm from './components/SignUpForm';
 import Home from './components/Home';
+import './styles/App.css';
 
 function App() {
   return (
     <Router>
       <div className="App">
         <Routes>
-          <Route path="/signup" element={<SignUpForm/>} />
+          <Route path="/signup" element={<SignUpForm />} />
           <Route path="/" element={<Home />} />
         </Routes>
       </div>
