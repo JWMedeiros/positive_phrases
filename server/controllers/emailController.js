@@ -22,7 +22,7 @@ const sendEmail = async () => {
       service: 'Gmail',
       auth: {
         user: process.env.EMAIL_USERNAME,
-        pass: EMAIL_PASSWORD,
+        pass: process.env.EMAIL_PASSWORD,
       },
     });
 
@@ -39,7 +39,7 @@ const sendEmail = async () => {
       await user.save();
 
       const mailOptions = {
-        from: EMAIL_USERNAME,
+        from: process.env.EMAIL_USERNAME,
         to: user.email,
         subject: 'A Positive Thought',
         text: randomMessage,

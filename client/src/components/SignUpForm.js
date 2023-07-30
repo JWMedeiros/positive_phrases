@@ -16,7 +16,9 @@ const SignUpForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('/api/users', formData);
+      //Hardcoding the endpoint rn, for larger project use: "proxy": "http://localhost:5000" in the package.json file.
+      //Then all api requests can be shortened, such as api/users.
+      await axios.post('http://localhost:5000/api/users', formData);
       alert('User registered successfully!');
     } catch (error) {
       console.error('Error registering user:', error);
