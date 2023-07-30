@@ -1,7 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const db = require('./models');
 const scheduleEmails = require('./scripts/scheduleEmails');
 
 const app = express();
@@ -19,5 +18,5 @@ app.use('/api/users', usersRoutes);
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
   // Start scheduling emails
-  //scheduleEmails();
+  scheduleEmails();
 });

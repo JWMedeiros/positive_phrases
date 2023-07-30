@@ -6,6 +6,7 @@ const router = express.Router();
 //Other routes can be added as needed.
 router.post('/', async (req, res) => {
   try {
+    req.body.messageIndex = 0;
     const newUser = await User.create(req.body);
     res.status(201).json(newUser);
   } catch (error) {

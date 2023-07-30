@@ -15,13 +15,14 @@ const messages = [
   'No one is perfect – that’s why pencils have erasers.',
 ];
 
-//Uses Gmail Service as of right now
+//Uses Yahoo Service as of right now
 const sendEmail = async () => {
   try {
     const transporter = nodemailer.createTransport({
-      service: 'Gmail',
+      service: 'yahoo',
       auth: {
         user: process.env.EMAIL_USERNAME,
+        //One Time password
         pass: process.env.EMAIL_PASSWORD,
       },
     });
@@ -29,6 +30,9 @@ const sendEmail = async () => {
     const users = await User.findAll();
 
     for (const user of users) {
+      console.log(user.username);
+      console.log(user.email);
+      console.log(user.messageIndex);
       if (user.messageIndex >= messages.length) {
         // If the user has received all 10 messages, skip sending further emails
         continue;
@@ -45,13 +49,24 @@ const sendEmail = async () => {
         text: randomMessage,
       };
 
-      transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-          console.error('Error sending email:', error);
-        } else {
+      // Add this line to enable debugging
+      // transporter.on('debug', (info) => {
+      //   console.log('Nodemailer debug info:', info);
+      // });
+
+      // Retry the email sending up to 3 times
+      let attempts = 0;
+      while (attempts < 3) {
+        try {
+          // Send the email
+          const info = await transporter.sendMail(mailOptions);
           console.log('Email sent:', info.response);
+          break; // If the email sending succeeds, exit the retry loop
+        } catch (error) {
+          console.error('Error sending email:', error);
+          attempts++;
         }
-      });
+      }
     }
   } catch (error) {
     console.error('Error sending emails:', error);

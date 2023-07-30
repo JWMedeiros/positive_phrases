@@ -30,6 +30,10 @@ const User = sequelize.define('User', {
     allowNull: false,
     unique: true,
   },
+  messageIndex: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
 });
 
 User.beforeCreate(async (user) => {

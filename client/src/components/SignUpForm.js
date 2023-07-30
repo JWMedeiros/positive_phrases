@@ -30,7 +30,7 @@ const SignUpForm = () => {
     <div className="container">
       <h2>Sign Up</h2>
       <form onSubmit={handleSubmit}>
-      <div>
+        <div>
           <label htmlFor="username">Username:</label>
           <input
             id="username" // Add id attribute and match it with the label's for attribute
